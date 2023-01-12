@@ -1,20 +1,16 @@
-const Task = ({ task }) => {
-  return (
-      <li>{task.content}</li>
-  )
-}
+import Task from "./components/Task";
 
-const App = ({ tasks }) => {
-  return (
-      <div>
-        <h1>Tasks</h1>
-        <ul>
-          {tasks.map(task =>
-              <Task key={task.id} task={task} />
-          )}
-        </ul>
-      </div>
-  )
+const App = ({tasks}) => {
+    return (
+        <div>
+            <h1>Tasks</h1>
+            <ul>
+                {tasks.map(task =>
+                    <Task key={task.id} task={task}/>
+                )}
+            </ul>
+        </div>
+    )
 }
 
 export default App;

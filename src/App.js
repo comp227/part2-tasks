@@ -3,6 +3,11 @@ import Task from './components/Task'
 
 const App = (props) => {
     const [tasks, setTasks] = useState(props.tasks)
+    // highlight-start
+    const [newTask, setNewTask] = useState(
+        'a new task...'
+    )
+    // highlight-end
 
     const addTask = (event) => {
         event.preventDefault()
@@ -18,7 +23,7 @@ const App = (props) => {
                 )}
             </ul>
             <form onSubmit={addTask}>
-                <input />
+                <input value={newTask} />
                 <button type="submit">save</button>
             </form>
         </div>

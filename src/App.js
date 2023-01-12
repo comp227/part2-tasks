@@ -11,7 +11,15 @@ const App = (props) => {
 
     const addTask = (event) => {
         event.preventDefault()
-        console.log('button clicked', event.target)
+        const taskObject = {
+            content: newTask,
+            date: new Date().toISOString(),
+            important: Math.random() < 0.5,
+            id: tasks.length + 1,
+        }
+
+        setTasks(tasks.concat(taskObject))
+        setNewTask('')
     }
 
     const handleTaskChange = (event) => {

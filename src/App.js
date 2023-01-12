@@ -1,6 +1,4 @@
-const App = (props) => {
-  const { tasks } = props
-
+const App = ({ tasks }) => {
   return (
       <div>
         <h1>Tasks</h1>

@@ -24,4 +24,6 @@ const tasks = [
     }
 ]
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+ReactDOM.createRoot(document.getElementById('root')).render(
+    <App tasks={tasks} />
+);

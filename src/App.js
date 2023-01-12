@@ -14,6 +14,11 @@ const App = (props) => {
         console.log('button clicked', event.target)
     }
 
+    const handleTaskChange = (event) => {
+        console.log(event.target.value)
+        setNewTask(event.target.value)
+    }
+
     return (
         <div>
             <h1>Tasks</h1>
@@ -23,7 +28,7 @@ const App = (props) => {
                 )}
             </ul>
             <form onSubmit={addTask}>
-                <input value={newTask} />
+                <input value={newTask} onChange={handleTaskChange} />
                 <button type="submit">save</button>
             </form>
         </div>

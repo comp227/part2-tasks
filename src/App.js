@@ -3,11 +3,8 @@ import Task from './components/Task'
 
 const App = (props) => {
     const [tasks, setTasks] = useState(props.tasks)
-    // highlight-start
-    const [newTask, setNewTask] = useState(
-        'a new task...'
-    )
-    // highlight-end
+    const [newTask, setNewTask] = useState('')
+    const [showAll, setShowAll] = useState(true)
 
     const addTask = (event) => {
         event.preventDefault()
@@ -27,11 +24,15 @@ const App = (props) => {
         setNewTask(event.target.value)
     }
 
+    const tasksToShow = showAll
+        ? tasks
+        : tasks.filter(task => task.important === true)
+
     return (
         <div>
             <h1>Tasks</h1>
             <ul>
-                {tasks.map(task =>
+                {tasksToShow.map(task =>
                     <Task key={task.id} task={task} />
                 )}
             </ul>

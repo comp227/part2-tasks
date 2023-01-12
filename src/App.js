@@ -26,7 +26,7 @@ const App = (props) => {
 
     const tasksToShow = showAll
         ? tasks
-        : tasks.filter(task => task.important === true)
+        : tasks.filter(task => task.important)
 
     return (
         <div>

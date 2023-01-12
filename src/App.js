@@ -1,12 +1,16 @@
+const Task = ({ task }) => {
+  return (
+      <li>{task.content}</li>
+  )
+}
+
 const App = ({ tasks }) => {
   return (
       <div>
         <h1>Tasks</h1>
         <ul>
           {tasks.map(task =>
-              <li key={task.id}>
-                {task.content}
-              </li>
+              <Task key={task.id} task={task} />
           )}
         </ul>
       </div>

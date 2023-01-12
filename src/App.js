@@ -31,6 +31,11 @@ const App = (props) => {
     return (
         <div>
             <h1>Tasks</h1>
+            <div>
+                <button onClick={() => setShowAll(!showAll)}>
+                    show {showAll? 'important' : 'all'}
+                </button>
+            </div>
             <ul>
                 {tasksToShow.map(task =>
                     <Task key={task.id} task={task} />

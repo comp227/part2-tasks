@@ -38,8 +38,14 @@ const App = () => {
         setNewTask(event.target.value)
     }
 
-    const toggleImportanceOf = (id) => {
-        console.log('importance of ' + id + ' needs to be toggled')
+    const toggleImportanceOf = id => {
+        const url = `http://localhost:3001/tasks/${id}`
+        const task = tasks.find(t => t.id === id)
+        const changedTask = { ...task, important: !task.important }
+
+        axios.put(url, changedTask).then(response => {
+            setTasks(tasks.map(t => t.id !== id ? t : response.data))
+        })
     }
 
     const tasksToShow = showAll

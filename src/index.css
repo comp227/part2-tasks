@@ -1,0 +1,10 @@
+h1 {
+    color: navy;
+    font-style: italic;
+}
+
+li {
+    color: saddlebrown;
+    padding-top: 3px;
+    font-size: 18px;
+}

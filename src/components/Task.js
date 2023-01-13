@@ -4,8 +4,7 @@ const Task = ({ task, toggleImportance }) => {
 
     return (
         <li>
-            {task.content}
-            <button onClick={toggleImportance}>{label}</button>
+            {task.content} <button onClick={toggleImportance}>{label}</button>
         </li>
     )
 }

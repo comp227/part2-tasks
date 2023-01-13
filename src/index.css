@@ -3,8 +3,8 @@ h1 {
     font-style: italic;
 }
 
-li {
+.task {
     color: saddlebrown;
-    padding-top: 3px;
+    padding-top: 5px;
     font-size: 18px;
 }

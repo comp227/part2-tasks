@@ -3,7 +3,7 @@ const Task = ({ task, toggleImportance }) => {
         ? 'make not important' : 'make important'
 
     return (
-        <li>
+        <li className='task'>
             {task.content} <button onClick={toggleImportance}>{label}</button>
         </li>
     )

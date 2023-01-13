@@ -2,11 +2,13 @@ import {useState, useEffect} from 'react'
 import axios from "axios";
 import Task from './components/Task'
 import taskService from './services/tasks'
+import Notification from "./components/Notification";
 
 const App = () => {
     const [tasks, setTasks] = useState([])
     const [newTask, setNewTask] = useState('')
     const [showAll, setShowAll] = useState(true)
+    const [errorMessage, setErrorMessage] = useState(null)
 
     useEffect(() => {
         taskService
@@ -48,9 +50,12 @@ const App = () => {
                 setTasks(tasks.map(t => t.id !== id ? t : returnedTask))
             })
             .catch(error => {
-                alert(
-                    `the task '${task.content}' was already deleted from server`
+                setErrorMessage(
+                    `Task '${task.content}' was already deleted from server`
                 )
+                setTimeout(() => {
+                    setErrorMessage(null)
+                }, 5000)
                 setTasks(tasks.filter(t => t.id !== id))
             })
     }
@@ -62,6 +67,7 @@ const App = () => {
     return (
         <div>
             <h1>Tasks</h1>
+            <Notification message={errorMessage} />
             <div>
                 <button onClick={() => setShowAll(!showAll)}>
                     show {showAll ? 'important' : 'all'}

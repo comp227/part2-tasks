@@ -1,11 +1,22 @@
-import { useState } from 'react' // highlight-line
+import {useState, useEffect} from 'react'
+import axios from "axios";
 import Task from './components/Task'
 
-const App = (props) => {
-    const [tasks, setTasks] = useState(props.tasks)
+const App = () => {
+    const [tasks, setTasks] = useState([])
     const [newTask, setNewTask] = useState('')
     const [showAll, setShowAll] = useState(true)
 
+    useEffect(() => {
+        console.log('use effect')
+        axios.get('http://localhost:3001/tasks')
+            .then(response => {
+                console.log('promise fulfilled')
+                setTasks(response.data)
+            })
+    }, [])
+
+    console.log('rendered', tasks.length, 'tasks')
     const addTask = (event) => {
         event.preventDefault()
         const taskObject = {
@@ -33,16 +44,16 @@ const App = (props) => {
             <h1>Tasks</h1>
             <div>
                 <button onClick={() => setShowAll(!showAll)}>
-                    show {showAll? 'important' : 'all'}
+                    show {showAll ? 'important' : 'all'}
                 </button>
             </div>
             <ul>
                 {tasksToShow.map(task =>
-                    <Task key={task.id} task={task} />
+                    <Task key={task.id} task={task}/>
                 )}
             </ul>
             <form onSubmit={addTask}>
-                <input value={newTask} onChange={handleTaskChange} />
+                <input value={newTask} onChange={handleTaskChange}/>
                 <button type="submit">save</button>
             </form>
         </div>

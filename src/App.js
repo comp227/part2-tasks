@@ -3,6 +3,7 @@ import axios from "axios";
 import Task from './components/Task'
 import taskService from './services/tasks'
 import Notification from "./components/Notification";
+import Footer from "./components/Footer";
 
 const App = () => {
     const [tasks, setTasks] = useState([])
@@ -86,6 +87,7 @@ const App = () => {
                 <input value={newTask} onChange={handleTaskChange}/>
                 <button type="submit">save</button>
             </form>
+            <Footer/>
         </div>
     );
 }

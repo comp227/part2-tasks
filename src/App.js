@@ -7,14 +7,16 @@ const App = () => {
     const [newTask, setNewTask] = useState('')
     const [showAll, setShowAll] = useState(true)
 
-    useEffect(() => {
+    const hook = () => {
         console.log('use effect')
         axios.get('http://localhost:3001/tasks')
             .then(response => {
                 console.log('promise fulfilled')
                 setTasks(response.data)
             })
-    }, [])
+    }
+
+    useEffect(hook, [])
 
     console.log('rendered', tasks.length, 'tasks')
     const addTask = (event) => {

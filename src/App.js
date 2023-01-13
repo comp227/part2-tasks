@@ -17,7 +17,7 @@ const App = () => {
     }, [])
 
     console.log('rendered', tasks.length, 'tasks')
-    const addTask = (event) => {
+    const addTask = event => {
         event.preventDefault()
         const taskObject = {
             content: newTask,
@@ -28,11 +28,9 @@ const App = () => {
         axios
             .post('http://localhost:3001/tasks', taskObject)
             .then(response => {
-                console.log(response)
+                setTasks(tasks.concat(response.data))
+                setNewTask('')
             })
-
-        setTasks(tasks.concat(taskObject))
-        setNewTask('')
     }
 
     const handleTaskChange = (event) => {

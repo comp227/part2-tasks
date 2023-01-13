@@ -17,6 +17,18 @@
       "content": "Buy salty snacks",
       "date": "2022-1-17T19:20:14.298Z",
       "important": true
+    },
+    {
+      "content": "Practice doing coding problems",
+      "date": "2023-01-13T05:24:09.637Z",
+      "important": true,
+      "id": 4
+    },
+    {
+      "content": "Get some exercise",
+      "date": "2023-01-13T05:31:12.933Z",
+      "important": false,
+      "id": 5
     }
   ]
 }

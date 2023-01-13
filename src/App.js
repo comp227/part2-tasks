@@ -38,6 +38,10 @@ const App = () => {
         setNewTask(event.target.value)
     }
 
+    const toggleImportanceOf = (id) => {
+        console.log('importance of ' + id + ' needs to be toggled')
+    }
+
     const tasksToShow = showAll
         ? tasks
         : tasks.filter(task => task.important)
@@ -52,7 +56,11 @@ const App = () => {
             </div>
             <ul>
                 {tasksToShow.map(task =>
-                    <Task key={task.id} task={task}/>
+                    <Task
+                        key={task.id}
+                        task={task}
+                        toggleImportance={() => toggleImportanceOf(task.id)}
+                    />
                 )}
             </ul>
             <form onSubmit={addTask}>
@@ -60,7 +68,7 @@ const App = () => {
                 <button type="submit">save</button>
             </form>
         </div>
-    )
+    );
 }
 
 export default App;

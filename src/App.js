@@ -47,6 +47,12 @@ const App = () => {
             .then(returnedTask => {
                 setTasks(tasks.map(t => t.id !== id ? t : returnedTask))
             })
+            .catch(error => {
+                alert(
+                    `the task '${task.content}' was already deleted from server`
+                )
+                setTasks(tasks.filter(t => t.id !== id))
+            })
     }
 
     const tasksToShow = showAll

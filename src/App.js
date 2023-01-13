@@ -23,8 +23,13 @@ const App = () => {
             content: newTask,
             date: new Date().toISOString(),
             important: Math.random() < 0.5,
-            id: tasks.length + 1,
         }
+
+        axios
+            .post('http://localhost:3001/tasks', taskObject)
+            .then(response => {
+                console.log(response)
+            })
 
         setTasks(tasks.concat(taskObject))
         setNewTask('')

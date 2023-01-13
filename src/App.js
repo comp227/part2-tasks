@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react'
 import axios from "axios";
 import Task from './components/Task'
+import taskService from './services/tasks'
 
 const App = () => {
     const [tasks, setTasks] = useState([])
@@ -8,10 +9,9 @@ const App = () => {
     const [showAll, setShowAll] = useState(true)
 
     useEffect(() => {
-        console.log('use effect')
-        axios.get('http://localhost:3001/tasks')
+        taskService
+            .getAll()
             .then(response => {
-                console.log('promise fulfilled')
                 setTasks(response.data)
             })
     }, [])
@@ -25,8 +25,8 @@ const App = () => {
             important: Math.random() < 0.5,
         }
 
-        axios
-            .post('http://localhost:3001/tasks', taskObject)
+        taskService
+            .create(taskObject)
             .then(response => {
                 setTasks(tasks.concat(response.data))
                 setNewTask('')
@@ -39,13 +39,14 @@ const App = () => {
     }
 
     const toggleImportanceOf = id => {
-        const url = `http://localhost:3001/tasks/${id}`
         const task = tasks.find(t => t.id === id)
         const changedTask = { ...task, important: !task.important }
 
-        axios.put(url, changedTask).then(response => {
-            setTasks(tasks.map(t => t.id !== id ? t : response.data))
-        })
+        taskService
+            .update(id, changedTask)
+            .then(response => {
+                setTasks(tasks.map(t => t.id !== id ? t : response.data))
+            })
     }
 
     const tasksToShow = showAll

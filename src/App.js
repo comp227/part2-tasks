@@ -11,8 +11,8 @@ const App = () => {
     useEffect(() => {
         taskService
             .getAll()
-            .then(response => {
-                setTasks(response.data)
+            .then(initialTasks => {
+                setTasks(initialTasks)
             })
     }, [])
 
@@ -27,8 +27,8 @@ const App = () => {
 
         taskService
             .create(taskObject)
-            .then(response => {
-                setTasks(tasks.concat(response.data))
+            .then(returnedTask => {
+                setTasks(tasks.concat(returnedTask))
                 setNewTask('')
             })
     }
@@ -44,8 +44,8 @@ const App = () => {
 
         taskService
             .update(id, changedTask)
-            .then(response => {
-                setTasks(tasks.map(t => t.id !== id ? t : response.data))
+            .then(returnedTask => {
+                setTasks(tasks.map(t => t.id !== id ? t : returnedTask))
             })
     }
 

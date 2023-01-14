@@ -1,5 +1,4 @@
 import {useState, useEffect} from 'react'
-import axios from "axios";
 import Task from './components/Task'
 import taskService from './services/tasks'
 import Notification from "./components/Notification";

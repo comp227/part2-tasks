@@ -23,7 +23,15 @@ const App = () => {
             })
     }, [])
 
-    console.log('rendered', tasks.length, 'tasks')
+    useEffect(() => {
+        const loggedUserJSON = window.localStorage.getItem('loggedTaskappUser')
+        if (loggedUserJSON) {
+            const user = JSON.parse(loggedUserJSON)
+            setUser(user)
+            taskService.setToken(user.token)
+        }
+    }, [])
+
     const addTask = event => {
         event.preventDefault()
         const taskObject = {
@@ -71,6 +79,9 @@ const App = () => {
             const user = await loginService.login({
                 username, password,
             })
+            window.localStorage.setItem(
+                'loggedTaskappUser', JSON.stringify(user)
+            )
             taskService.setToken(user.token)
             setUser(user)
             setUsername('')

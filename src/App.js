@@ -9,6 +9,8 @@ const App = () => {
     const [newTask, setNewTask] = useState('')
     const [showAll, setShowAll] = useState(true)
     const [errorMessage, setErrorMessage] = useState(null)
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
 
     useEffect(() => {
         taskService
@@ -60,6 +62,11 @@ const App = () => {
             })
     }
 
+    const handleLogin = (event) => {
+        event.preventDefault()
+        console.log('logging in with', username, password)
+    }
+
     const tasksToShow = showAll
         ? tasks
         : tasks.filter(task => task.important)
@@ -68,6 +75,27 @@ const App = () => {
         <div>
             <h1>Tasks</h1>
             <Notification message={errorMessage} />
+            <form onSubmit={handleLogin}>
+                    <div>
+                        username
+                        <input
+                            type="text"
+                            value={username}
+                            name="Username"
+                            onChange={({ target }) => setUsername(target.value)}
+                        />
+                    </div>
+                    <div>
+                        password
+                        <input
+                            type="password"
+                            value={password}
+                            name="Password"
+                            onChange={({ target }) => setPassword(target.value)}
+                        />
+                    </div>
+                    <button type="submit">login</button>
+                </form>
             <div>
                 <button onClick={() => setShowAll(!showAll)}>
                     show {showAll ? 'important' : 'all'}

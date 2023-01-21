@@ -83,6 +83,40 @@ const App = () => {
         }
     }
 
+    const loginForm = () => (
+        <form onSubmit={handleLogin}>
+            <div>
+                username
+                <input
+                    type="text"
+                    value={username}
+                    name="Username"
+                    onChange={({ target }) => setUsername(target.value)}
+                />
+            </div>
+            <div>
+                password
+                <input
+                    type="password"
+                    value={password}
+                    name="Password"
+                    onChange={({ target }) => setPassword(target.value)}
+                />
+            </div>
+            <button type="submit">login</button>
+        </form>
+    )
+
+    const taskForm = () => (
+        <form onSubmit={addTask}>
+            <input
+                value={newTask}
+                onChange={handleTaskChange}
+            />
+            <button type="submit">save</button>
+        </form>
+    )
+
     const tasksToShow = showAll
         ? tasks
         : tasks.filter(task => task.important)
@@ -91,27 +125,8 @@ const App = () => {
         <div>
             <h1>Tasks</h1>
             <Notification message={errorMessage} />
-            <form onSubmit={handleLogin}>
-                    <div>
-                        username
-                        <input
-                            type="text"
-                            value={username}
-                            name="Username"
-                            onChange={({ target }) => setUsername(target.value)}
-                        />
-                    </div>
-                    <div>
-                        password
-                        <input
-                            type="password"
-                            value={password}
-                            name="Password"
-                            onChange={({ target }) => setPassword(target.value)}
-                        />
-                    </div>
-                    <button type="submit">login</button>
-                </form>
+            {user === null && loginForm()}
+            {user !== null && taskForm()}
             <div>
                 <button onClick={() => setShowAll(!showAll)}>
                     show {showAll ? 'important' : 'all'}
@@ -126,10 +141,6 @@ const App = () => {
                     />
                 )}
             </ul>
-            <form onSubmit={addTask}>
-                <input value={newTask} onChange={handleTaskChange}/>
-                <button type="submit">save</button>
-            </form>
             <Footer/>
         </div>
     );

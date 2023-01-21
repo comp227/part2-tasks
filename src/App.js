@@ -96,6 +96,10 @@ const App = () => {
                     </div>
                     <button type="submit">login</button>
                 </form>
+            <form onSubmit={addTask}>
+                <input value={newTask} onChange={handleTaskChange}/>
+                <button type="submit">save</button>
+            </form>
             <div>
                 <button onClick={() => setShowAll(!showAll)}>
                     show {showAll ? 'important' : 'all'}
@@ -110,10 +114,6 @@ const App = () => {
                     />
                 )}
             </ul>
-            <form onSubmit={addTask}>
-                <input value={newTask} onChange={handleTaskChange}/>
-                <button type="submit">save</button>
-            </form>
             <Footer/>
         </div>
     );

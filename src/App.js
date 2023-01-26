@@ -5,6 +5,8 @@ import Notification from "./components/Notification";
 import Footer from "./components/Footer";
 import loginService from './services/login'
 import LoginForm from "./components/LoginForm";
+import Togglable from "./components/Togglable";
+import TaskForm from "./components/TaskForm";
 
 const App = () => {
     const [loginVisible, setLoginVisible] = useState(false)
@@ -120,13 +122,13 @@ const App = () => {
     }
 
     const taskForm = () => (
-        <form onSubmit={addTask}>
-            <input
+        <Togglable buttonLabel="new task">
+            <TaskForm
+                onSubmit={addTask}
                 value={newTask}
-                onChange={handleTaskChange}
+                handleChange={handleTaskChange}
             />
-            <button type="submit">save</button>
-        </form>
+        </Togglable>
     )
 
     const tasksToShow = showAll
@@ -145,9 +147,11 @@ const App = () => {
                 </div>
             }
             <div>
-                <button onClick={() => setShowAll(!showAll)}>
-                    show {showAll ? 'important' : 'all'}
-                </button>
+                <p>
+                    <button onClick={() => setShowAll(!showAll)}>
+                        show {showAll ? 'important' : 'all'}
+                    </button>
+                </p>
             </div>
             <ul>
                 {tasksToShow.map(task =>

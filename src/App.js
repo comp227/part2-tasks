@@ -11,7 +11,6 @@ import TaskForm from "./components/TaskForm";
 const App = () => {
     const [loginVisible, setLoginVisible] = useState(false)
     const [tasks, setTasks] = useState([])
-    const [newTask, setNewTask] = useState('')
     const [showAll, setShowAll] = useState(true)
     const [errorMessage, setErrorMessage] = useState(null)
     const [username, setUsername] = useState('')
@@ -36,25 +35,12 @@ const App = () => {
         }
     }, [])
 
-    const addTask = event => {
-        event.preventDefault()
-        const taskObject = {
-            content: newTask,
-            date: new Date().toISOString(),
-            important: Math.random() < 0.5,
-        }
-
+    const addTask = (taskObject) => {
         taskService
             .create(taskObject)
             .then(returnedTask => {
                 setTasks(tasks.concat(returnedTask))
-                setNewTask('')
             })
-    }
-
-    const handleTaskChange = (event) => {
-        console.log(event.target.value)
-        setNewTask(event.target.value)
     }
 
     const toggleImportanceOf = id => {
@@ -122,12 +108,8 @@ const App = () => {
     }
 
     const taskForm = () => (
-        <Togglable buttonLabel="new task">
-            <TaskForm
-                onSubmit={addTask}
-                value={newTask}
-                handleChange={handleTaskChange}
-            />
+        <Togglable buttonLabel='new task'>
+            <TaskForm createTask={addTask} />
         </Togglable>
     )
 

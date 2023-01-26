@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useRef} from 'react'
 import Task from './components/Task'
 import taskService from './services/tasks'
 import Notification from "./components/Notification";
@@ -16,7 +16,7 @@ const App = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [user, setUser] = useState(null)
-
+    const taskFormRef = useRef()
 
     useEffect(() => {
         taskService
@@ -36,6 +36,7 @@ const App = () => {
     }, [])
 
     const addTask = (taskObject) => {
+        taskFormRef.current.toggleVisibility()
         taskService
             .create(taskObject)
             .then(returnedTask => {
@@ -108,7 +109,7 @@ const App = () => {
     }
 
     const taskForm = () => (
-        <Togglable buttonLabel='new task'>
+        <Togglable buttonLabel='new task' ref={taskFormRef}>
             <TaskForm createTask={addTask} />
         </Togglable>
     )

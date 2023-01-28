@@ -125,8 +125,8 @@ const App = () => {
         <div>
             <h1>Tasks</h1>
             <Notification message={errorMessage} />
-            {user === null?
-                loginForm():
+            {!user && loginForm()}
+            {user &&
                 <div>
                     <p>{user.name} logged-in</p>
                     {taskForm()}

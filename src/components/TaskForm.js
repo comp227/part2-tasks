@@ -1,21 +1,21 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
 const TaskForm = ({ createTask }) => {
-    const [newTask, setNewTask] = useState('')
+    const [newTask, setNewTask] = useState('');
 
     const handleChange = (event) => {
-        setNewTask(event.target.value)
-    }
+        setNewTask(event.target.value);
+    };
 
     const addTask = (event) => {
-        event.preventDefault()
+        event.preventDefault();
         createTask({
             content: newTask,
             important: Math.random() > 0.5,
-        })
+        });
 
-        setNewTask('')
-    }
+        setNewTask('');
+    };
 
     return (
         <div>
@@ -29,7 +29,7 @@ const TaskForm = ({ createTask }) => {
                 <button type="submit">save</button>
             </form>
         </div>
-    )
-}
+    );
+};
 
-export default TaskForm
+export default TaskForm;

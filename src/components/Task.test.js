@@ -9,8 +9,10 @@ test('renders content', () => {
         important: true
     };
 
-    render(<Task task={task} />);
+    const { container } = render(<Task task={task} />);
 
-    const element = screen.getByText('Component testing is done with react-testing-library');
-    expect(element).toBeDefined();
+    const div = container.querySelector('.task');
+    expect(div).toHaveTextContent(
+        'Component testing is done with react-testing-library'
+    );
 });

@@ -11,7 +11,7 @@ const TaskForm = ({ createTask }) => {
         event.preventDefault();
         createTask({
             content: newTask,
-            important: Math.random() > 0.5,
+            important: false,
         });
 
         setNewTask('');
@@ -23,13 +23,10 @@ const TaskForm = ({ createTask }) => {
 
             <form onSubmit={addTask}>
                 <input
+                    id='new-task'
                     value={newTask}
                     onChange={handleChange}
                     placeholder='write task here'
-                />
-                <input
-                    value=''
-                    onChange={handleChange}
                 />
                 <button type="submit">save</button>
             </form>

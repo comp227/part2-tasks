@@ -10,10 +10,10 @@ test('<TaskForm /> updates parent state and calls onSubmit', async () => {
 
     render(<TaskForm createTask={createTask} />);
 
-    const inputs = screen.getByRole('textbox');
+    const input = screen.getByPlaceholderText('write task here');
     const sendButton = screen.getByText('save');
 
-    await user.type(inputs[0], 'testing a form...');
+    await user.type(input, 'testing a form...');
     await user.click(sendButton);
 
     expect(createTask.mock.calls).toHaveLength(1);

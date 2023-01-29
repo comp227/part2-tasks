@@ -25,6 +25,11 @@ const TaskForm = ({ createTask }) => {
                 <input
                     value={newTask}
                     onChange={handleChange}
+                    placeholder='write task here'
+                />
+                <input
+                    value=''
+                    onChange={handleChange}
                 />
                 <button type="submit">save</button>
             </form>

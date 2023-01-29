@@ -28,6 +28,15 @@ describe('Task app', function() {
         cy.contains('Pacific Tests logged in');
     });
 
+    it.only('login fails with wrong password', function() {
+        cy.contains('login').click();
+        cy.get('#username').type('root');
+        cy.get('#password').type('wrong');
+        cy.get('#login-button').click();
+
+        cy.contains('Wrong credentials');
+    });
+
     describe('when logged in', function() {
         beforeEach(function () {
             cy.contains('login').click();

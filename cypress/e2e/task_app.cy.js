@@ -11,4 +11,10 @@ describe('Task app', function() {
     it('login form can be opened', function() {
         cy.contains('log in').click();
     });
+
+    it('user can login', function () {
+        cy.contains('log in').click();
+        cy.get('input:first').type('powercat');
+        cy.get('input:last').type('tigers');
+    });
 });

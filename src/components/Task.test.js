@@ -38,3 +38,15 @@ test('clicking the button calls event handler once', async () => {
 
     expect(mockHandler.mock.calls).toHaveLength(1);
 });
+
+test('does not render this', () => {
+    const task = {
+        content: 'This is a reminder',
+        important: true
+    };
+
+    render(<Task task={task} />);
+
+    const element = screen.queryByText('do not want this thing to be rendered');
+    expect(element).toBeNull();
+});

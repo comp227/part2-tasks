@@ -125,7 +125,7 @@ const App = () => {
             {!user && loginForm()}
             {user &&
                 <div>
-                    <p>{user.name} logged-in</p>
+                    <p>{user.name} logged in</p>
                     {taskForm()}
                 </div>
             }

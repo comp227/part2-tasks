@@ -34,9 +34,12 @@ describe('Task app', function() {
         cy.get('#password').type('wrong');
         cy.get('#login-button').click();
 
-        cy.get('.error').should('contain', 'Wrong credentials');
-        cy.get('.error').should('have.css', 'background-color', 'rgb(156, 43, 46)');
-        cy.get('.error').should('have.css', 'border-style', 'solid');
+        cy.get('.error')
+            .should('contain', 'Wrong credentials')
+            .and('have.css', 'background-color', 'rgb(156, 43, 46)')
+            .and('have.css', 'border-style', 'solid');
+
+        cy.get('html').should('not.contain', 'Pacific Tests logged in');
     });
 
     describe('when logged in', function() {

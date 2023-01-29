@@ -9,11 +9,11 @@ describe('Task app', function() {
     });
 
     it('login form can be opened', function() {
-        cy.contains('log in').click();
+        cy.contains('login').click();
     });
 
     it('user can login', function () {
-        cy.contains('log in').click();
+        cy.contains('login').click();
         cy.get('#username').type('root');
         cy.get('#password').type('tigers');
         cy.get('#login-button').click();

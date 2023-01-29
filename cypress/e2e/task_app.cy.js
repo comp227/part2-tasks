@@ -34,7 +34,7 @@ describe('Task app', function() {
         cy.get('#password').type('wrong');
         cy.get('#login-button').click();
 
-        cy.contains('Wrong credentials');
+        cy.get('.error').contains('Wrong credentials');
     });
 
     describe('when logged in', function() {

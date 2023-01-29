@@ -4,4 +4,9 @@ describe('Task app', function() {
         cy.contains('Tasks');
         cy.contains('Task app, Department of Computer Science, University of the Pacific 2023');
     });
+
+    it('login form can be opened', function() {
+        cy.visit('http://localhost:3000');
+        cy.contains('log in').click();
+    });
 });

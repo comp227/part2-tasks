@@ -14,7 +14,10 @@ describe('Task app', function() {
 
     it('user can login', function () {
         cy.contains('log in').click();
-        cy.get('input:first').type('powercat');
-        cy.get('input:last').type('tigers');
+        cy.get('#username').type('root');
+        cy.get('#password').type('tigers');
+        cy.get('#login-button').click();
+
+        cy.contains('Superuser logged in');
     });
 });

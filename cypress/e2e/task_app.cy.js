@@ -28,7 +28,7 @@ describe('Task app', function() {
         cy.contains('Pacific Tests logged in');
     });
 
-    it.only('login fails with wrong password', function() {
+    it('login fails with wrong password', function() {
         cy.contains('login').click();
         cy.get('#username').type('root');
         cy.get('#password').type('wrong');
@@ -44,10 +44,12 @@ describe('Task app', function() {
 
     describe('when logged in', function() {
         beforeEach(function () {
-            cy.contains('login').click();
-            cy.get('#username').type('test');
-            cy.get('#password').type('pacific');
-            cy.get('#login-button').click();
+            cy.request('POST', 'http://localhost:3001/api/login', {
+                username: 'test', password: 'pacific'
+            }).then(response => {
+                localStorage.setItem('loggedTaskappUser', JSON.stringify(response.body));
+                cy.visit('http://localhost:3000');
+            });
         });
 
         it('a new task can be created', function () {

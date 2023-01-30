@@ -1,12 +1,12 @@
 describe('Task app', function() {
     beforeEach(function() {
-        cy.request('POST', 'http://localhost:3001/api/testing/reset');
+        cy.request('POST', `${Cypress.env('BACKEND_API')}/testing/reset`);
         const user = {
             name: 'Pacific Tests',
             username: 'test',
             password: 'pacific'
         };
-        cy.request('POST', 'http://localhost:3001/api/users/', user);
+        cy.request('POST', `${Cypress.env('BACKEND_API')}/users/`, user);
         cy.visit('');
     });
 

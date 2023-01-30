@@ -44,12 +44,7 @@ describe('Task app', function() {
 
     describe('when logged in', function() {
         beforeEach(function () {
-            cy.request('POST', 'http://localhost:3001/api/login', {
-                username: 'test', password: 'pacific'
-            }).then(response => {
-                localStorage.setItem('loggedTaskappUser', JSON.stringify(response.body));
-                cy.visit('http://localhost:3000');
-            });
+            cy.login({ username: 'test', password: 'pacific' });
         });
 
         it('a new task can be created', function () {

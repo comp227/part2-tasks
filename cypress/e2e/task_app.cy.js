@@ -7,7 +7,7 @@ describe('Task app', function() {
             password: 'pacific'
         };
         cy.request('POST', 'http://localhost:3001/api/users/', user);
-        cy.visit('http://localhost:3000');
+        cy.visit('');
     });
 
     it('front page can be opened', function() {

@@ -57,19 +57,15 @@ describe('Task app', function() {
 
         describe('and a task exists', function () {
             beforeEach(function () {
-                cy.createTask({
-                    content: 'another task cypress',
-                    important: false
-                });
+                cy.createTask({ content: 'first task', important: false });
+                cy.createTask({ content: 'second task', important: false });
+                cy.createTask({ content: 'third task', important: false });
             });
 
-            it('it can be made important', function () {
-                cy.contains('another task cypress')
-                    .contains('make important')
-                    .click();
-
-                cy.contains('another task cypress')
-                    .contains('make not important');
+            it('one of those can be made important', function () {
+                cy.contains('second task').parent().find('button').as('theButton');
+                cy.get('@theButton').click();
+                cy.get('@theButton').should('contain', 'make not important');
             });
         });
     });

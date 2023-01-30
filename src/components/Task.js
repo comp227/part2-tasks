@@ -4,7 +4,8 @@ const Task = ({ task, toggleImportance }) => {
 
     return (
         <li className='task'>
-            {task.content} <button onClick={toggleImportance}>{label}</button>
+            <span>{task.content}</span>
+            <button onClick={toggleImportance}>{label}</button>
         </li>
     );
 };

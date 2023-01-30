@@ -55,6 +55,13 @@ describe('Task app', function() {
             cy.contains('a task created by cypress');
         });
 
+        it('then example', function() {
+            cy.get('button').then( buttons => {
+                console.log('number of buttons', buttons.length);
+                cy.wrap(buttons[0]).click();
+            });
+        });
+
         describe('and a task exists', function () {
             beforeEach(function () {
                 cy.createTask({ content: 'first task', important: false });

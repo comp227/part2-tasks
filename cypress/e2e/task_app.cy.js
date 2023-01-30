@@ -57,9 +57,10 @@ describe('Task app', function() {
 
         describe('and a task exists', function () {
             beforeEach(function () {
-                cy.contains('new task').click();
-                cy.get('#new-task').type('another task cypress');
-                cy.contains('save').click();
+                cy.createTask({
+                    content: 'another task cypress',
+                    important: false
+                });
             });
 
             it('it can be made important', function () {

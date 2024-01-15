@@ -1,5 +1,5 @@
-import { useState } from 'react' // highlight-line
-import Task from './components/Task'
+import {useState} from "react";
+import Task from "./components/Task";
 
 const App = (props) => {
     const [tasks, setTasks] = useState(props.tasks)
@@ -11,7 +11,7 @@ const App = (props) => {
         const taskObject = {
             content: newTask,
             date: new Date().toISOString(),
-            important: Math.random() < 0.5,
+            important: Math.random() > 0.5,
             id: tasks.length + 1,
         }
 
@@ -24,16 +24,14 @@ const App = (props) => {
         setNewTask(event.target.value)
     }
 
-    const tasksToShow = showAll
-        ? tasks
-        : tasks.filter(task => task.important)
+    const tasksToShow = showAll? tasks: tasks.filter(task => task.important)
 
     return (
         <div>
             <h1>Tasks</h1>
             <div>
                 <button onClick={() => setShowAll(!showAll)}>
-                    show {showAll? 'important' : 'all'}
+                    show {showAll? 'important': 'all'}
                 </button>
             </div>
             <ul>
@@ -42,11 +40,14 @@ const App = (props) => {
                 )}
             </ul>
             <form onSubmit={addTask}>
-                <input value={newTask} onChange={handleTaskChange} />
+                <input
+                    value={newTask}
+                    onChange={handleTaskChange}
+                />
                 <button type="submit">save</button>
             </form>
         </div>
     )
 }
 
-export default App;
+export default App

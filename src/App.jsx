@@ -1,20 +1,18 @@
-import { useState } from 'react' // highlight-line
-import Task from './components/Task'
+import {useState} from "react";
+import Task from "./components/Task";
 
 const App = (props) => {
     const [tasks, setTasks] = useState(props.tasks)
-    // highlight-start
     const [newTask, setNewTask] = useState(
         'a new task...'
     )
-    // highlight-end
 
     const addTask = (event) => {
         event.preventDefault()
         const taskObject = {
             content: newTask,
             date: new Date().toISOString(),
-            important: Math.random() < 0.5,
+            important: Math.random() > 0.5,
             id: tasks.length + 1,
         }
 
@@ -36,11 +34,14 @@ const App = (props) => {
                 )}
             </ul>
             <form onSubmit={addTask}>
-                <input value={newTask} onChange={handleTaskChange} />
+                <input
+                    value={newTask}
+                    onChange={handleTaskChange}
+                />
                 <button type="submit">save</button>
             </form>
         </div>
     )
 }
 
-export default App;
+export default App

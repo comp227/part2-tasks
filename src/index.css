@@ -1,7 +1,3 @@
-:root {
-    color-scheme: dark;
-}
-
 h1 {
     color: chocolate;
     font-style: italic;
@@ -11,6 +7,10 @@ h1 {
     color: #f4b223;
     padding-top: 8px;
     font-size: 18px;
+}
+
+:root {
+    color-scheme:dark;
 }
 
 .error {

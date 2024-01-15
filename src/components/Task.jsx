@@ -4,9 +4,10 @@ const Task = ({ task, toggleImportance }) => {
 
     return (
         <li className='task'>
-            {task.content} <button onClick={toggleImportance}>{label}</button>
+            {task.content}
+            <button onClick={toggleImportance}>{label}</button>
         </li>
     )
 }
 
-export default Task;
+export default Task

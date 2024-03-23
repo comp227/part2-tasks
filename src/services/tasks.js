@@ -1,11 +1,11 @@
-import axios from 'axios';
+import axios from "axios";
 
-const baseUrl = '/api/tasks';
+const baseUrl = "/api/tasks";
 
 let token = null;
 
 const setToken = newToken => {
-    token = `bearer ${newToken}`;
+    token = `Bearer ${newToken}`;
 };
 
 const getAll = () => {

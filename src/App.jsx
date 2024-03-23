@@ -1,21 +1,21 @@
-import { useState, useEffect, useRef } from 'react';
-import Task from './components/Task';
-import taskService from './services/tasks';
-import Notification from './components/Notification';
-import Footer from './components/Footer';
-import loginService from './services/login';
-import LoginForm from './components/LoginForm';
-import Togglable from './components/Togglable';
-import TaskForm from './components/TaskForm';
+import { useEffect, useState, useRef } from "react";
+import Task from "./components/Task";
+import taskService from "./services/tasks";
+import loginService from "./services/login";
+import Notification from "./components/Notification.jsx";
+import LoginForm from "./components/LoginForm.jsx";
+import Togglable from "./components/Togglable.jsx";
+import TaskForm from "./components/TaskForm.jsx";
+import { Footer } from "./components/Footer.jsx";
 
 const App = () => {
-    const [loginVisible, setLoginVisible] = useState(false);
     const [tasks, setTasks] = useState([]);
     const [showAll, setShowAll] = useState(true);
-    const [errorMessage, setErrorMessage] = useState(null);
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState("some error happened...");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
     const [user, setUser] = useState(null);
+    const [loginVisible, setLoginVisible] = useState(false);
     const taskFormRef = useRef();
 
     useEffect(() => {
@@ -27,13 +27,39 @@ const App = () => {
     }, []);
 
     useEffect(() => {
-        const loggedUserJSON = window.localStorage.getItem('loggedTaskappUser');
+        const loggedUserJSON = window.localStorage.getItem("loggedTaskappUser");
         if (loggedUserJSON) {
             const user = JSON.parse(loggedUserJSON);
             setUser(user);
             taskService.setToken(user.token);
         }
     }, []);
+
+    console.log("rendered", tasks.length, "tasks");
+
+    const handleLogin = async (event) => {
+        event.preventDefault();
+
+        try {
+            const user = await loginService.login({
+                username, password,
+            });
+
+            window.localStorage.setItem(
+                "loggedTaskappUser", JSON.stringify(user)
+            );
+
+            taskService.setToken(user.token);
+            setUser(user);
+            setUsername("");
+            setPassword("");
+        } catch (exception) {
+            setErrorMessage("Wrong credentials");
+            setTimeout(() => {
+                setErrorMessage(null);
+            }, 5000);
+        }
+    };
 
     const addTask = (taskObject) => {
         taskFormRef.current.toggleVisibility();
@@ -44,14 +70,14 @@ const App = () => {
             });
     };
 
-    const toggleImportanceOf = id => {
+    const toggleImportanceOf = (id) => {
         const task = tasks.find(t => t.id === id);
         const changedTask = { ...task, important: !task.important };
 
         taskService
             .update(id, changedTask)
             .then(returnedTask => {
-                setTasks(tasks.map(t => t.id !== id ? t : returnedTask));
+                setTasks(tasks.map(task => task.id !== id ? task : returnedTask));
             })
             .catch(() => {
                 setErrorMessage(
@@ -64,30 +90,11 @@ const App = () => {
             });
     };
 
-    const handleLogin = async (event) => {
-        event.preventDefault();
-        try {
-            const user = await loginService.login({
-                username, password,
-            });
-            window.localStorage.setItem(
-                'loggedTaskappUser', JSON.stringify(user)
-            );
-            taskService.setToken(user.token);
-            setUser(user);
-            setUsername('');
-            setPassword('');
-        } catch (exception) {
-            setErrorMessage('Wrong credentials');
-            setTimeout(() => {
-                setErrorMessage(null);
-            }, 5000);
-        }
-    };
+    const tasksToShow = showAll? tasks: tasks.filter(task => task.important);
 
     const loginForm = () => {
-        const hideWhenVisible = { display: loginVisible ? 'none' : '' };
-        const showWhenVisible = { display: loginVisible ? '' : 'none' };
+        const hideWhenVisible = { display: loginVisible ? "none" : "" };
+        const showWhenVisible = { display: loginVisible ? "" : "none" };
 
         return (
             <div>
@@ -108,20 +115,18 @@ const App = () => {
         );
     };
 
+
     const taskForm = () => (
-        <Togglable buttonLabel='new task' ref={taskFormRef}>
+        <Togglable buttonLabel="new task" ref={taskFormRef}>
             <TaskForm createTask={addTask} />
         </Togglable>
     );
 
-    const tasksToShow = showAll
-        ? tasks
-        : tasks.filter(task => task.important);
-
     return (
         <div>
             <h1>Tasks</h1>
-            <Notification message={errorMessage} />
+            <Notification message={errorMessage}/>
+
             {!user && loginForm()}
             {user &&
                 <div>
@@ -129,17 +134,16 @@ const App = () => {
                     {taskForm()}
                 </div>
             }
+
             <div>
-                <p>
-                    <button onClick={() => setShowAll(!showAll)}>
-                        show {showAll ? 'important' : 'all'}
-                    </button>
-                </p>
+                <button onClick={() => setShowAll(!showAll)}>
+                    show {showAll ? "important" : "all"}
+                </button>
             </div>
             <ul>
-                {tasksToShow.map(task =>
+                {tasksToShow.map((task, i) =>
                     <Task
-                        key={task.id}
+                        key={i}
                         task={task}
                         toggleImportance={() => toggleImportanceOf(task.id)}
                     />

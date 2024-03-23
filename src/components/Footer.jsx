@@ -1,4 +1,4 @@
-const Footer = () => {
+export const Footer = () => {
     const footerStyle = {
         marginTop: 30,
         paddingBottom: 15,
@@ -10,9 +10,7 @@ const Footer = () => {
     return (
         <div style={footerStyle}>
             <br />
-            Task app, Department of Computer Science, University of the Pacific 2023
+            Task app, Department of Computer Science, University of the Pacific
         </div>
     )
 }
-
-export default Footer;
